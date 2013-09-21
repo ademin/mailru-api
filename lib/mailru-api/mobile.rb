@@ -1,7 +1,7 @@
 #:encoding: utf-8
 
 module MailRU
-	class API
+  class API
     class Mobile
       BASIC = 'basic'
       SMARTPHONE = 'smartphone'
@@ -14,5 +14,5 @@ module MailRU
         GetRequest.new(@api, 'mobile.getCanvas', params, Request::Secure::No).get
       end
     end
-	end
+  end
 end

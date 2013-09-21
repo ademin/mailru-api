@@ -20,7 +20,7 @@ module MailRU
 
   class APIConfigurationBuilder
     attr_reader :configuration
-  
+
     def initialize(&block)
       if block_given?
         @configuration = APIConfiguration.new
@@ -43,11 +43,11 @@ module MailRU
     def session_key value
       @configuration.session_key = value
     end
-    
+
     def uid value
       @configuration.uid = value
     end
-    
+
     def format value
       @configuration.format = value
     end
@@ -60,9 +60,9 @@ module MailRU
     end
 
     PATH = 'http://www.appsmail.ru/platform/api'
-  
+
     attr_accessor :app_id, :secret_key, :private_key, :session_key, :uid, :format
-  
+
     def initialize options = {}, &block
       @app_id = options[:app_id]
       @secret_key = options[:secret_key]
@@ -88,35 +88,35 @@ module MailRU
         end
       end
     end
-    
+
     def audio
       return Audio.new(self)
     end
-    
+
     def events
       return Events.new(self)
     end
-    
+
     def friends
       return Friends.new(self)
     end
-    
+
     def guestbook
       return Guestbook.new(self)
     end
-    
+
     def mail
       return Mail.new(self)
     end
-    
+
     def messages
       return Messages.new(self)
     end
-    
+
     def mobile
       return Mobile.new(self)
     end
-    
+
     def notifications
       return Notifications.new(self)
     end
@@ -124,11 +124,11 @@ module MailRU
     def photos
       return Photos.new(self)
     end
-    
+
     def stream
       return Stream.new(self)
     end
-    
+
     def users
       return Users.new(self)
     end

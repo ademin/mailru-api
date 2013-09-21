@@ -1,7 +1,7 @@
 #:encoding: utf-8
 
 module MailRU
-	class API
+  class API
     class Guestbook
       def initialize api
         @api = api
@@ -15,5 +15,5 @@ module MailRU
         PostRequest.new(@api, 'guestbook.post', params).post
       end
     end
-	end
+  end
 end

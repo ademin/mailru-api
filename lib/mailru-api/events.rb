@@ -1,7 +1,7 @@
 #:encoding: utf-8
 
 module MailRU
-	class API
+  class API
     class Events
       def initialize api
         @api = api
@@ -11,5 +11,5 @@ module MailRU
         GetRequest.new(@api, 'events.getNewCount', {}).get
       end
     end
-	end
+  end
 end
