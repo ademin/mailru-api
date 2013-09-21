@@ -30,13 +30,34 @@ module MailRU
       end
 
       def use_c2s?
-        @api.private_key and (@secure == Secure::No or @secure == Secure::Any)
+        @api.private_key and (@secure == Secure::No or @secure == Secure::Any) and @api.uid
       end
 
       def signature
         return s2s_signature if use_s2s?
         return c2s_signature if use_c2s?
-        ''
+
+        if @secure == Secure::Yes and @api.secret_key.nil?
+          raise Error.create(0, 'secret_key must be specified for secure requests.')
+        end
+
+        if @secure == Secure::No and @api.private_key.nil?
+          raise Error.create(0, 'private_key must be specified for non secure requests.')
+        end
+
+        if @secure == Secure::Any and @api.secret_key.nil? and @api.private_key.nil?
+          raise Error.create(0, 'secret_key or private_key must be specified.')
+        end
+
+        if @secure == Secure::No and @api.uid.nil?
+          raise Error.create(0, 'uid must be specified for non secure requests.')
+        end
+
+        if @secure == Secure::Any and @api.secret_key.nil? and @api.uid.nil?
+          raise Error.create(0, 'uid must be specified for non secure requests.')
+        end
+
+        raise Error.create(0, 'unknown error.')
       end
 
       def c2s_signature

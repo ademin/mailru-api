@@ -127,13 +127,13 @@ module MailRU
 
     def mobile
       DSL.new(self, 'mobile') do
-        api 'getCanvas'
+        api 'getCanvas', :get, Request::Secure::No
       end
     end
 
     def notifications
       DSL.new(self, 'notifications') do
-        api 'send'
+        api 'send', :get, Request::Secure::Yes
       end
     end
 

@@ -25,7 +25,7 @@ module MailRU
           when 200 then PermissionDeniedError.new(code, description)
           when 202 then AccessToObjectDeniedError.new(code, description)
           when 501 then IncorrectImageError.new(code, description)
-          else Error.new(code, description)
+          else Error.new(code, "Internal Error: #{description}")
         end
       end
     end

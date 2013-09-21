@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'mailru-api'
-  s.version     = '0.5.0'
-  s.date        = '2013-09-01'
+  s.version     = '0.5.1'
+  s.date        = '2013-09-22'
   s.summary     = "MailRU API for Ruby"
   s.description = "MailRU API for Ruby"
   s.authors     = ["Alexey Demin"]
@@ -10,6 +10,6 @@ Gem::Specification.new do |s|
                    'lib/mailru-api/error.rb',
                    'lib/mailru-api/request.rb',
                    'lib/mailru-api/dsl.rb']
-  s.homepage    = ''
+  s.homepage    = 'https://github.com/ademin/mailru-api'
   s.license     = 'MIT'
 end
