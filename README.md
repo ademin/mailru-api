@@ -141,10 +141,7 @@ Mailru-api - это гем, предоставляющий простой и л�
         uids = ['uid1', 'uid2', 'uid3'].join(',')
         text = message.encoding('utf-8')
 
-        MailRU::API.new do
-          app_id 'hidden'
-          secret_key 'hidden'
-        end.notifications.send(uids: uids, text: text)
+        MailRU::API.new(app_id: 'hidden', secret_key: 'hidden').notifications.send(uids: uids, text: text)
 
 # License
 
