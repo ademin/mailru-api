@@ -92,7 +92,7 @@ Mailru-api - это гем, предоставляющий простой и л�
 
 * Метод notifications.send
 
-        uids = ['uid1', 'uid2', ..., 'uidn']
+        uids = ['uid1', 'uid2', ..., 'uidn'].join(',')
         text = 'hello'.encode('utf-8')
         api.notifications.send(uids: uids, text: text)
 
