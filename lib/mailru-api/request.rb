@@ -65,7 +65,7 @@ module MailRU
 
           error = response if response.name == 'error'
           if error
-            raise MailRU::API::Error.create(
+            raise Error.create(
               error.elements['error_code'].text,
               error.elements['error_msg'].text
             )
@@ -75,7 +75,7 @@ module MailRU
           if response.is_a?(Hash)
             error = response['error']
             if error
-              raise MailRU::API::Error.create(error['error_code'], error['error_msg'])
+              raise Error.create(error['error_code'], error['error_msg'])
             end
           end
         end

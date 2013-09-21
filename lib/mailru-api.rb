@@ -2,16 +2,7 @@
 
 require 'mailru-api/error'
 require 'mailru-api/request'
-require 'mailru-api/audio'
-require 'mailru-api/events'
-require 'mailru-api/friends'
-require 'mailru-api/guestbook'
-require 'mailru-api/mail'
-require 'mailru-api/mobile'
-require 'mailru-api/notifications'
-require 'mailru-api/photos'
-require 'mailru-api/stream'
-require 'mailru-api/users'
+require 'mailru-api/dsl'
 
 module MailRU
   class APIConfiguration
@@ -90,47 +81,90 @@ module MailRU
     end
 
     def audio
-      return Audio.new(self)
+      DSL.new(self.clone, 'audio') do
+        api 'get'
+        api 'link'
+        api 'search'
+      end
     end
 
     def events
-      return Events.new(self)
+      DSL.new(self.clone, 'events') do
+        api 'getNewCount'
+      end
     end
 
     def friends
-      return Friends.new(self)
+      DSL.new(self.clone, 'friends') do
+        api 'get'
+        api 'getAppUsers'
+        api 'getInvitationsCount'
+        api 'getOnline'
+      end
     end
 
     def guestbook
-      return Guestbook.new(self)
+      DSL.new(self, 'guestbook') do
+        api 'get'
+        api 'post', :post
+      end
     end
 
     def mail
-      return Mail.new(self)
+      DSL.new(self, 'mail') do
+        api 'getUnreadCount'
+      end
     end
 
     def messages
-      return Messages.new(self)
+      DSL.new(self, 'messages') do
+        api 'getThread'
+        api 'getThreadsList'
+        api 'getUnreadCount'
+        api 'post', :post
+      end
     end
 
     def mobile
-      return Mobile.new(self)
+      DSL.new(self, 'mobile') do
+        api 'getCanvas'
+      end
     end
 
     def notifications
-      return Notifications.new(self)
+      DSL.new(self, 'notifications') do
+        api 'send'
+      end
     end
 
     def photos
-      return Photos.new(self)
+      DSL.new(self, 'photos')  do
+        api 'createAlbum'
+        api 'get'
+        api 'getAlbums'
+        api 'upload', :post
+      end
     end
 
     def stream
-      return Stream.new(self)
+      DSL.new(self, 'stream') do
+        api 'comment'
+        api 'get'
+        api 'getByAuthor'
+        api 'like'
+        api 'post', :post
+        api 'share', :post
+        api 'unlike'
+      end
     end
 
     def users
-      return Users.new(self)
+      DSL.new(self, 'users') do
+        api 'getBalance'
+        api 'getInfo'
+        api 'hasAppPermission'
+        api 'isAppUser'
+      end
     end
   end
 end

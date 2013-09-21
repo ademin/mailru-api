@@ -6,6 +6,8 @@ module MailRU
       attr_accessor :code, :description
 
       def initialize code, description
+        super("#{code}, #{description}")
+
         @code = Integer(code)
         @description = description
       end
