@@ -37,6 +37,10 @@ module MailRU
         return s2s_signature if use_s2s?
         return c2s_signature if use_c2s?
 
+        if @api.app_id.nil?
+          raise Error.create(0, 'app_id must be specified.')
+        end
+
         if @secure == Secure::Yes and @api.secret_key.nil?
           raise Error.create(0, 'secret_key must be specified for secure requests.')
         end
@@ -72,8 +76,10 @@ module MailRU
         params = {app_id: @api.app_id, method: @method}
         params.merge!({session_key: @api.session_key}) if @api.session_key
         params.merge!({format: @api.format}) if @api.format
-        params.merge!(@method_params) if @method_params
+        params.merge!({uid: @api.uid}) if use_c2s?
         params.merge!({secure: 1}) if use_s2s?
+
+        params.merge!(@method_params) if @method_params
 
         params.to_a.map{|p| p.join('=')}
       end

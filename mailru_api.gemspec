@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.date        = '2013-09-22'
   s.summary     = "Ruby @Mail.RU API"
   s.description = "Ruby @Mail.RU API"
-  s.authors     = ["Alexey Demin"]
+  s.author      = "Alexey Demin"
   s.email       = 'demin.alexey@inbox.ru'
   s.files       = ['lib/mailru-api.rb',
                    'lib/mailru-api/error.rb',
