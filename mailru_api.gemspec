@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name        = 'mailru-api'
-  s.version     = '0.5.1'
+  s.version     = '0.5.2'
   s.date        = '2013-09-22'
-  s.summary     = "MailRU API for Ruby"
-  s.description = "MailRU API for Ruby"
+  s.summary     = "Ruby @Mail.RU API"
+  s.description = "Ruby @Mail.RU API"
   s.authors     = ["Alexey Demin"]
   s.email       = 'demin.alexey@inbox.ru'
   s.files       = ['lib/mailru-api.rb',
