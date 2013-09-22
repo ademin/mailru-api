@@ -106,7 +106,7 @@ Mailru-api - это гем, предоставляющий простой и л�
 
 * Вызов метода audio.get через HTTP GET
 
-        MailRU::API::GetRequest.new(api, 'audio.get', {limit: 10})
+        MailRU::API::GetRequest.new(api, 'audio.get', {limit: 10}).get
 
 * Вызом метода audio.get через HTTP POST
        
