@@ -81,7 +81,7 @@ module MailRU
     end
 
     def audio
-      DSL.new(self.clone, 'audio') do
+      DSL.new(self, 'audio') do
         api 'get'
         api 'link'
         api 'search'
@@ -89,13 +89,13 @@ module MailRU
     end
 
     def events
-      DSL.new(self.clone, 'events') do
+      DSL.new(self, 'events') do
         api 'getNewCount'
       end
     end
 
     def friends
-      DSL.new(self.clone, 'friends') do
+      DSL.new(self, 'friends') do
         api 'get'
         api 'getAppUsers'
         api 'getInvitationsCount'
