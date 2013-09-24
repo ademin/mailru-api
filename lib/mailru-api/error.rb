@@ -14,7 +14,7 @@ module MailRU
 
       def self.create(code, description)
         case code
-          when 1 then UnknwonError.new(code, description)
+          when 1 then UnknownError.new(code, description)
           when 2 then UnknownMethodCalledError.new(code, description)
           when 3 then MethodIsDeprecatedError.new(code, description)
           when 100 then InvalidParameterError.new(code, description)
