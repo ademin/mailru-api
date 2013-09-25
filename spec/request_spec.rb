@@ -7,7 +7,7 @@ module MailRU
   class API
     describe Request do
       before(:each) do
-        @api = APIConfiguration.new
+        @api = API.new
       end
 
       context 'use_s2s?' do
@@ -162,7 +162,7 @@ module MailRU
       context 'handle_response' do
         context 'for XML' do
           before(:each) do
-            @api = APIConfiguration.new
+            @api = API.new
             @api.format = Format::XML
 
             @success_response = %q(
@@ -202,7 +202,7 @@ module MailRU
         context 'for JSON' do
 
           before(:each) do
-            @api = APIConfiguration.new
+            @api = API.new
 
             @success_response = %q({
               "success": {
@@ -244,7 +244,7 @@ module MailRU
       it 'should send a request via HTTP GET' do
         WebMock.disable_net_connect!
         stub_request(:get, /#{MailRU::API::PATH}.*/).to_return(body: [].to_json)
-        GetRequest.new(APIConfiguration.new, nil, nil).send_via_get
+        GetRequest.new(API.new, nil, nil).send_via_get
         WebMock.should have_requested(:get, /#{MailRU::API::PATH}.*/)
         WebMock.allow_net_connect!
       end
@@ -260,7 +260,7 @@ module MailRU
       it 'should send a request via HTTP POST' do
         WebMock.disable_net_connect!
         stub_request(:post, /#{MailRU::API::PATH}.*/).to_return(body: [].to_json)
-        PostRequest.new(APIConfiguration.new, nil, nil).send_via_post
+        PostRequest.new(API.new, nil, nil).send_via_post
         WebMock.should have_requested(:post, /#{MailRU::API::PATH}.*/)
         WebMock.allow_net_connect!
       end
