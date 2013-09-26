@@ -1,13 +1,12 @@
 #:encoding: utf-8
-
 require 'mailru-api/error'
 require 'mailru-api/request'
 require 'mailru-api/dsl'
 
 module MailRU
   class API
-    API_KEYS = [:app_id, :secret_key, :private_key, :session_key, :uid, :format]
     PATH = 'http://www.appsmail.ru/platform/api'
+    PARAMS = [:app_id, :secret_key, :private_key, :session_key, :uid, :format]
 
     module Format
       XML = 'xml'
@@ -17,31 +16,42 @@ module MailRU
     class ConfigurationBuilder
       attr_reader :configuration
 
-      API_KEYS.each do |key|
-        define_method(key) { |value| @configuration[key] = value }
-      end
-
       def initialize(&block)
         @configuration = {}
         instance_eval(&block) if block_given?
       end
-    end
 
-    API_KEYS.each do |key|
-      define_method("#{key}=") { |value| @configuration[key] = value }
-      define_method(key) { @configuration[key] }
+      PARAMS.each do |param|
+        class_eval <<-EOV, __FILE__, __LINE__ + 1
+          def #{param}(value)                  # def app_id(value)
+            @configuration[:#{param}] = value  #   @configuration[:app_id] = value
+          end                                  # end
+        EOV
+      end
     end
 
     def initialize options = {}, &block
-      @configuration = options.select { |key, value| API_KEYS.include?(key) }
+      @configuration = options
 
       if block_given?
         if block.arity == 1
           yield self
         else
-          @configuration.merge ConfigurationBuilder.new(&block).configuration
+          @configuration.merge! ConfigurationBuilder.new(&block).configuration
         end
       end
+    end
+
+    PARAMS.each do |param|
+      class_eval <<-EOV, __FILE__, __LINE__ + 1
+        def #{param}=(value)                 # def app_id=(value)
+          @configuration[:#{param}] = value  #   @configuration[:app_id] = value
+        end                                  # end
+
+        def #{param}                         # def app_id
+          @configuration[:#{param}]          #   @configuration[:app_id]
+        end                                  # end
+      EOV
     end
 
     def audio
