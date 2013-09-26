@@ -1,83 +1,57 @@
 #:encoding: utf-8
-
 require 'mailru-api/error'
 require 'mailru-api/request'
 require 'mailru-api/dsl'
 
 module MailRU
-  class APIConfiguration
-    attr_accessor :app_id, :secret_key, :private_key, :session_key, :uid, :format
-  end
-
-  class APIConfigurationBuilder
-    attr_reader :configuration
-
-    def initialize(&block)
-      if block_given?
-        @configuration = APIConfiguration.new
-        instance_eval(&block)
-      end
-    end
-
-    def app_id value
-      @configuration.app_id = value
-    end
-
-    def secret_key value
-      @configuration.secret_key = value
-    end
-
-    def private_key value
-      @configuration.private_key = value
-    end
-
-    def session_key value
-      @configuration.session_key = value
-    end
-
-    def uid value
-      @configuration.uid = value
-    end
-
-    def format value
-      @configuration.format = value
-    end
-  end
-
   class API
+    PATH = 'http://www.appsmail.ru/platform/api'
+    PARAMS = [:app_id, :secret_key, :private_key, :session_key, :uid, :format]
+
     module Format
       XML = 'xml'
       JSON = 'json'
     end
 
-    PATH = 'http://www.appsmail.ru/platform/api'
+    class ConfigurationBuilder
+      attr_reader :configuration
 
-    attr_accessor :app_id, :secret_key, :private_key, :session_key, :uid, :format
+      def initialize(&block)
+        @configuration = {}
+        instance_eval(&block) if block_given?
+      end
+
+      PARAMS.each do |param|
+        class_eval <<-EOV, __FILE__, __LINE__ + 1
+          def #{param}(value)                  # def app_id(value)
+            @configuration[:#{param}] = value  #   @configuration[:app_id] = value
+          end                                  # end
+        EOV
+      end
+    end
 
     def initialize options = {}, &block
-      @app_id = options[:app_id]
-      @secret_key = options[:secret_key]
-      @private_key = options[:private_key]
-      @session_key = options[:session_key]
-      @uid = options[:uid]
-      @format = options[:format]
+      @configuration = options
 
       if block_given?
         if block.arity == 1
           yield self
         else
-          configuration = APIConfigurationBuilder.new(&block).configuration
-
-          unless configuration.nil?
-            @app_id = configuration.app_id || @app_id
-            @secret_key = configuration.secret_key || @secret_key
-            @private_key = configuration.private_key || @private_key
-            @session_key = configuration.session_key || @session_key
-            @uid = configuration.uid || @uid
-            @format = configuration.format || @format
-          end
+          @configuration.merge! ConfigurationBuilder.new(&block).configuration
         end
       end
+    end
+
+    PARAMS.each do |param|
+      class_eval <<-EOV, __FILE__, __LINE__ + 1
+        def #{param}=(value)                 # def app_id=(value)
+          @configuration[:#{param}] = value  #   @configuration[:app_id] = value
+        end                                  # end
+
+        def #{param}                         # def app_id
+          @configuration[:#{param}]          #   @configuration[:app_id]
+        end                                  # end
+      EOV
     end
 
     def audio
