@@ -187,7 +187,7 @@ module MailRU
           end
 
           it 'should not raise an error' do
-            expect { Request.new(@api, nil, nil).send(:handle_response, @success_response)}.to_not raise_error(Error)
+            expect { Request.new(@api, nil, nil).send(:handle_response, @success_response)}.to_not raise_error
           end
 
           it 'should raise error' do
@@ -220,7 +220,7 @@ module MailRU
           end
 
           it 'should not raise an error' do
-            expect { Request.new(@api, nil, nil).send(:handle_response, @success_response)}.to_not raise_error(Error)
+            expect { Request.new(@api, nil, nil).send(:handle_response, @success_response)}.to_not raise_error
           end
 
           it 'should raise error' do
