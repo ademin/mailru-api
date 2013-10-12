@@ -51,6 +51,10 @@ module MailRU
           subject.post_insecure_method.class.should eq(PostRequest)
           subject.post_insecure_method.instance_variable_get('@secure').should eq(Request::Secure::No)
         end
+
+        it %q(should raise an error when api's HTTP method is not set to GET or POST) do
+          expect { DSL.new(nil, 'group') {api 'error', :error} }.to raise_error(Error)
+        end
       end
 
       context 'underscore' do

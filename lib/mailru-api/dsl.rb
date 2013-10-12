@@ -12,10 +12,11 @@ module MailRU
       end
 
       def api name, method = :get, secure = Request::Secure::Any
+        raise Error.create(0, 'HTTP method must be GET or POST!') unless [:get, :post].include?(method)
+
         self.class.send(:define_method, underscore(name)) do |params = {}|
           return GetRequest.new(@api, "#{@group}.#{name}", params, secure).get if method == :get
           return PostRequest.new(@api, "#{@group}.#{name}", params, secure).post if method == :post
-          raise Error.create(0, 'HTTP method must be GET or POST!')
         end
       end
 
