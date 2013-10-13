@@ -16,7 +16,7 @@ module MailRU
         Any = 2
       end
 
-      def initialize api, method, method_params, secure = Secure::Any
+      def initialize api, method, method_params = {}, secure = Secure::Any
         @api = api
         @method = method
         @method_params = method_params

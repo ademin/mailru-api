@@ -6,21 +6,22 @@ module MailRU
       def initialize api, group,  &block
         @api = api
         @group = group
-        if block_given?
-          instance_eval(&block)
-        end
+        instance_eval(&block) if block_given?
       end
 
       def api name, method = :get, secure = Request::Secure::Any
         raise Error.create(0, 'HTTP method must be GET or POST!') unless [:get, :post].include?(method)
 
-        self.class.send(:define_method, underscore(name)) do |params = {}|
-          return GetRequest.new(@api, "#{@group}.#{name}", params, secure).get if method == :get
-          return PostRequest.new(@api, "#{@group}.#{name}", params, secure).post if method == :post
+        method(SEND).call(:define_singleton_method, underscore(name)) do |params = {}|
+          return @api.get("#{@group}.#{name}", params, secure) if method == :get
+          return @api.post("#{@group}.#{name}", params, secure) if method == :post
         end
       end
 
       private
+
+      SEND = (0...6).map{ (65 + rand(26)).chr }.join
+      alias_method(SEND, :send)
 
       def underscore s
         s.gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').

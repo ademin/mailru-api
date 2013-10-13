@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'mailru-api'
-  s.version     = '0.6.1'
+  s.version     = '0.7.0'
   s.date        = '2013-10-13'
   s.summary     = "Ruby @Mail.RU API"
   s.description = "Ruby @Mail.RU API"

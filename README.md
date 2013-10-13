@@ -107,15 +107,30 @@ Mailru-api - это гем, предоставляющий простой и л�
 
 ### Что делать если @MAIL.RU обновил API, но их поддержка еще не добавленна в Mailru-api?
 
-Любой метод можно вызвать выполнением HTTP GET или HTTP POST запроса. Для этого Mailru-api предоставляет соответствующие классы
+Любой метод можно вызвать выполнением HTTP GET или HTTP POST запроса. Для этого Mailru-api
+предоставляет два метода:
+
+        api.get(name, params = {}, secure = MailRU::API::Request::Secure::Any)
+        api.post(name, params = {}, secure = MailRU::API::Request::Secure::Any)
 
 * Вызов метода audio.get через HTTP GET
 
-        MailRU::API::GetRequest.new(api, 'audio.get', {limit: 10}).get
+        api.get('audio.get')
+        api.get('audio.get', limit:10)
+        api.get('audio.get', offset: 2, limit: 10)
 
-* Вызом метода audio.get через HTTP POST
-       
-        MailRU::API::PostRequest.new(api, 'audio.get', {limit: 10}).post
+* Вызов метода audio.get через HTTP POST
+
+        api.post('audio.get')
+
+* Вызов метода notifications.send через HTTP POST
+
+        uids = ['uid1', 'uid2', 'uid3'].join(',')
+        text = 'Тексе сообщения.'.encoding('utf-8')
+
+        # Метод notifications.send разрешается вызывать только по схеме Сервер-Сервер.
+        # Указываем эту особенность через через установку параметра secure в MailRU::API::Request::Secure::Yes.
+        api.post('notifications.send', {uids: uids, text: text}, MailRU::API::Request::Secure::Yes)
 
 ## Обработка результатов вызова
 

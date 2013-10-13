@@ -10,8 +10,8 @@ module MailRU
           class GetRequest; def get; self; end; end
           class PostRequest; def post; self; end; end
 
-          DSL.new(nil, 'group') do
-            api 'method'
+          DSL.new(API.new, 'group') do
+            api 'send'
             api 'getMethod', :get
             api 'postMethod', :post
             api 'getSecureMethod', :get, Request::Secure::Yes
@@ -19,17 +19,17 @@ module MailRU
           end
         end
 
-        it %(should have methods: 'method', 'get_method', 'post_method', 'get_secure_method', 'post_insecure_method']) do
-          subject.should respond_to(:method)
+        it %(should have methods: 'send', 'get_method', 'post_method', 'get_secure_method', 'post_insecure_method']) do
+          subject.should respond_to(:send)
           subject.should respond_to(:get_method)
           subject.should respond_to(:post_method)
           subject.should respond_to(:get_secure_method)
           subject.should respond_to(:post_insecure_method)
         end
 
-        it %q(should have method 'method' which send any GET request) do
-          subject.method.class.should eq(GetRequest)
-          subject.method.instance_variable_get('@secure').should eq(Request::Secure::Any)
+        it %q(should have method 'send' which send any GET request) do
+          subject.send.class.should eq(GetRequest)
+          subject.send.instance_variable_get('@secure').should eq(Request::Secure::Any)
         end
 
         it %q(should have method 'get_method' which send any GET request) do
@@ -53,15 +53,17 @@ module MailRU
         end
 
         it %q(should raise an error when api's HTTP method is not set to GET or POST) do
-          expect { DSL.new(nil, 'group') {api 'error', :error} }.to raise_error(Error)
+          expect { DSL.new(API.new, 'group') {api 'error', :error} }.to raise_error(Error)
         end
       end
 
       context 'underscore' do
-        subject { DSL.new(nil, nil) }
+        subject do
+          DSL.new(nil, nil)
+        end
 
         it 'should return first_second_third for firstSecondThird' do
-          subject.send(:underscore, 'firstSecondThird').should eq('first_second_third')
+          subject.method(:underscore).call('firstSecondThird').should eq('first_second_third')
         end
       end
     end

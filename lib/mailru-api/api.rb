@@ -51,6 +51,14 @@ module MailRU
       EOV
     end
 
+    def get name, params = {}, secure = Request::Secure::Any
+      GetRequest.new(self, name, params, secure).get
+    end
+
+    def post name, params = {}, secure = Request::Secure::Any
+      PostRequest.new(self, name, params, secure).post
+    end
+
     def audio
       DSL.new(self, 'audio') do
         api 'get'
