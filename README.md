@@ -128,9 +128,7 @@ Mailru-api - это гем, предоставляющий простой и л�
         uids = ['uid1', 'uid2', 'uid3'].join(',')
         text = 'Тексе сообщения.'.encoding('utf-8')
 
-        # Метод notifications.send разрешается вызывать только по схеме Сервер-Сервер.
-        # Указываем эту особенность через установку параметра secure в MailRU::API::Request::Secure::Yes.
-        api.post('notifications.send', {uids: uids, text: text}, MailRU::API::Request::Secure::Yes)
+        api.post('notifications.send', {uids: uids, text: text})
 
 ## Обработка результатов вызова
 
