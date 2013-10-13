@@ -110,8 +110,8 @@ Mailru-api - это гем, предоставляющий простой и л�
 Любой метод можно вызвать выполнением HTTP GET или HTTP POST запроса. Для этого Mailru-api
 предоставляет два метода:
 
-        api.get(name, params = {}, secure = MailRU::API::Request::Secure::Any)
-        api.post(name, params = {}, secure = MailRU::API::Request::Secure::Any)
+    api.get(name, params = {}, secure = MailRU::API::Request::Secure::Any)
+    api.post(name, params = {}, secure = MailRU::API::Request::Secure::Any)
 
 * Вызов метода audio.get через HTTP GET
 
