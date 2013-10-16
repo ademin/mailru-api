@@ -52,11 +52,19 @@ module MailRU
       it 'should respond to get method' do
         subject.should respond_to(:get)
       end
+
+      it 'should use HTTP GET for get method' do
+        subject.get('guestbook.get').class.should eq(API::GetRequest)
+      end
     end
 
     context 'post' do
       it 'should respond to post method' do
         subject.should respond_to(:post)
+      end
+
+      it 'should use HTTP POST for post method' do
+        subject.post('guestbook.post').class.should eq(API::PostRequest)
       end
     end
 
