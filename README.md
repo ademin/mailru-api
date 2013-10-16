@@ -165,4 +165,4 @@ Mailru-api - это гем, предоставляющий простой и л�
 
 # License
 
-Copyright &#169; 2013 Alexey Demin, MIT License (www.opensource.org/licenses/mit-license.php) 
+Copyright &#169; 2013 Alexey Demin, MIT License
