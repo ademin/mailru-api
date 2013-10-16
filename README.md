@@ -1,4 +1,8 @@
-# Mailru-api [![Gem Version](https://badge.fury.io/rb/mailru-api.png)](http://badge.fury.io/rb/mailru-api) [![Build Status](https://secure.travis-ci.org/ademin/mailru-api.png)](http://travis-ci.org/ademin/mailru-api) [![Code Climate](https://codeclimate.com/github/ademin/mailru-api.png)](https://codeclimate.com/github/ademin/mailru-api) [![Coverage Status](https://coveralls.io/repos/ademin/mailru-api/badge.png)](https://coveralls.io/r/ademin/mailru-api) [![Dependency Status](https://gemnasium.com/ademin/mailru-api.png)](https://gemnasium.com/ademin/mailru-api)
+[![Gem Version](https://badge.fury.io/rb/mailru-api.png)](http://badge.fury.io/rb/mailru-api) [![Build Status](https://secure.travis-ci.org/ademin/mailru-api.png)](http://travis-ci.org/ademin/mailru-api) [![Code Climate](https://codeclimate.com/github/ademin/mailru-api.png)](https://codeclimate.com/github/ademin/mailru-api) [![Coverage Status](https://coveralls.io/repos/ademin/mailru-api/badge.png)](https://coveralls.io/r/ademin/mailru-api) [![Dependency Status](https://gemnasium.com/ademin/mailru-api.png)](https://gemnasium.com/ademin/mailru-api)
+
+***
+
+# Mailru-api
 
 Mailru-api - это гем, предоставляющий простой и лаконичный способ взаимодействия с сервисами @MAIL.RU, реализованный на базе @MAIL.RU REST API (документацию можно найти по ссылке: http://api.mail.ru/docs/guides/restapi/).
 
