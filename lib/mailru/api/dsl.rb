@@ -7,7 +7,7 @@ module MailRU
         instance_eval(&block) if block_given?
       end
 
-      def api name, method = :get, secure = Request::Secure::Any
+      def api name, method = :post, secure = Request::Secure::Any
         raise Error.create(0, 'HTTP method must be GET or POST!') unless [:get, :post].include?(method)
 
         method(SEND).call(:define_singleton_method, underscore(name)) do |params = {}|

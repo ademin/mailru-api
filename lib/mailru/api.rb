@@ -61,7 +61,7 @@ module MailRU
     def guestbook
       DSL.new(self, 'guestbook') do
         api 'get'
-        api 'post', :post
+        api 'post'
       end
     end
 
@@ -76,19 +76,19 @@ module MailRU
         api 'getThread'
         api 'getThreadsList'
         api 'getUnreadCount'
-        api 'post', :post
+        api 'post'
       end
     end
 
     def mobile
       DSL.new(self, 'mobile') do
-        api 'getCanvas', :get, Request::Secure::No
+        api 'getCanvas', :post, Request::Secure::No
       end
     end
 
     def notifications
       DSL.new(self, 'notifications') do
-        api 'send', :get, Request::Secure::Yes
+        api 'send', :post, Request::Secure::Yes
       end
     end
 
@@ -97,7 +97,7 @@ module MailRU
         api 'createAlbum'
         api 'get'
         api 'getAlbums'
-        api 'upload', :post
+        api 'upload'
       end
     end
 
@@ -107,8 +107,8 @@ module MailRU
         api 'get'
         api 'getByAuthor'
         api 'like'
-        api 'post', :post
-        api 'share', :post
+        api 'post'
+        api 'share'
         api 'unlike'
       end
     end
