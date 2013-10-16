@@ -1,31 +1,7 @@
-#:encoding: utf-8
-
 module MailRU
   class API
     PATH = 'http://www.appsmail.ru/platform/api'
     PARAMS = [:app_id, :secret_key, :private_key, :session_key, :uid, :format]
-
-    module Format
-      XML = 'xml'
-      JSON = 'json'
-    end
-
-    class ConfigurationBuilder
-      attr_reader :configuration
-
-      def initialize(&block)
-        @configuration = {}
-        instance_eval(&block) if block_given?
-      end
-
-      PARAMS.each do |param|
-        class_eval <<-EOV, __FILE__, __LINE__ + 1
-          def #{param}(value)                  # def app_id(value)
-            @configuration[:#{param}] = value  #   @configuration[:app_id] = value
-          end                                  # end
-        EOV
-      end
-    end
 
     def initialize options = {}, &block
       @configuration = options
@@ -147,3 +123,9 @@ module MailRU
     end
   end
 end
+
+require 'mailru/api/configuration_builder'
+require 'mailru/api/dsl'
+require 'mailru/api/error'
+require 'mailru/api/format'
+require 'mailru/api/request'

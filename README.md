@@ -1,4 +1,4 @@
-# Mailru-api
+# Mailru-api  [![Build Status](https://secure.travis-ci.org/ademin/mailru-api.png)](http://travis-ci.org/ademin/mailru-api)
 
 Mailru-api - это гем, предоставляющий простой и лаконичный способ взаимодействия с сервисами @MAIL.RU, реализованный на базе @MAIL.RU REST API (документацию можно найти по ссылке: http://api.mail.ru/docs/guides/restapi/).
 
@@ -8,8 +8,7 @@ Mailru-api - это гем, предоставляющий простой и л�
     
 или добавьте следующую строчку в свой Gemfile:
 
-
-    gem "mailru-api"
+    gem "mailru-api", :require => 'mailru/api'
 
 # Документация
 
@@ -137,6 +136,9 @@ Mailru-api - это гем, предоставляющий простой и л�
 ## Примеры из реальной жизни
 
 * Пример 1
+        require 'mailru/api'
+
+        ...
 
         api = MailRU::API.new do |configuration|
           configuration.app_id = 'hidden'

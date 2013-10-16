@@ -1,6 +1,4 @@
-#:encoding: utf-8
-
-require 'mailru-api'
+require 'spec_helper'
 
 module MailRU
   class API
