@@ -37,9 +37,10 @@ module MailRU
 
     def audio
       DSL.new(self, 'audio') do
-        api 'get'
+        api 'get', :post
         api 'link'
-        api 'search'
+        api 'search', :post
+        api 'top', :get, Request::Secure::No
       end
     end
 
@@ -61,7 +62,7 @@ module MailRU
     def guestbook
       DSL.new(self, 'guestbook') do
         api 'get'
-        api 'post'
+        api 'post', :post
       end
     end
 
@@ -76,13 +77,13 @@ module MailRU
         api 'getThread'
         api 'getThreadsList'
         api 'getUnreadCount'
-        api 'post'
+        api 'post', :post
       end
     end
 
     def mobile
       DSL.new(self, 'mobile') do
-        api 'getCanvas', :post, Request::Secure::No
+        api 'getCanvas', :get, Request::Secure::No
       end
     end
 
@@ -94,21 +95,21 @@ module MailRU
 
     def photos
       DSL.new(self, 'photos')  do
-        api 'createAlbum'
-        api 'get'
-        api 'getAlbums'
-        api 'upload'
+        api 'createAlbum', :post
+        api 'get', :post
+        api 'getAlbums', :post
+        api 'upload', :post
       end
     end
 
     def stream
       DSL.new(self, 'stream') do
-        api 'comment'
+        api 'comment', :post
         api 'get'
         api 'getByAuthor'
         api 'like'
-        api 'post'
-        api 'share'
+        api 'post', :post
+        api 'share', :post
         api 'unlike'
       end
     end
@@ -116,7 +117,7 @@ module MailRU
     def users
       DSL.new(self, 'users') do
         api 'getBalance'
-        api 'getInfo'
+        api 'getInfo', :post
         api 'hasAppPermission'
         api 'isAppUser'
       end

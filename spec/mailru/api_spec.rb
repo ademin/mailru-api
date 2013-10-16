@@ -66,6 +66,16 @@ module MailRU
         subject.audio.should respond_to(:get)
         subject.audio.should respond_to(:link)
         subject.audio.should respond_to(:search)
+        subject.audio.should respond_to(:top)
+      end
+
+      it %q(should use HTTP POST for the get, search apis) do
+        subject.audio.get.class.should eq(API::PostRequest)
+        subject.audio.search.class.should eq(API::PostRequest)
+      end
+
+      it %q(should force to use client-server schema for top api) do
+        subject.audio.top.instance_variable_get('@secure').should eq(API::Request::Secure::No)
       end
     end
 
@@ -139,6 +149,10 @@ module MailRU
       it %q(should force to use server-server schema for the send api) do
         subject.notifications.send.instance_variable_get('@secure').should eq(API::Request::Secure::Yes)
       end
+
+      it %q(should use HTTP POST for the send api) do
+        subject.notifications.send.class.should eq(API::PostRequest)
+      end
     end
 
     context 'photos' do
@@ -150,7 +164,11 @@ module MailRU
         subject.photos.should respond_to(:upload)
       end
 
-      it %q(should use HTTP POST for the upload api) do
+      it %q(should use HTTP POST for the create_album, get, getAlbum, upload apis) do
+        subject.photos.create_album.class.should eq(API::PostRequest)
+        subject.photos.get.class.should eq(API::PostRequest)
+        subject.photos.get_albums.class.should eq(API::PostRequest)
+        subject.photos.get_albums.class.should eq(API::PostRequest)
         subject.photos.upload.class.should eq(API::PostRequest)
       end
     end
@@ -167,7 +185,8 @@ module MailRU
         subject.stream.should respond_to(:unlike)
       end
 
-      it %q(should use HTTP POST for the post & share apis) do
+      it %q(should use HTTP POST for the comment, post, share apis) do
+        subject.stream.comment.class.should eq(API::PostRequest)
         subject.stream.post.class.should eq(API::PostRequest)
         subject.stream.share.class.should eq(API::PostRequest)
       end
@@ -180,6 +199,10 @@ module MailRU
         subject.users.should respond_to(:get_info)
         subject.users.should respond_to(:has_app_permission)
         subject.users.should respond_to(:is_app_user)
+      end
+
+      it %q(should use HTTP POST for the get_info api) do
+        subject.users.get_info.class.should eq(API::PostRequest)
       end
     end
   end
