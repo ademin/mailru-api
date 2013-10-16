@@ -1,4 +1,4 @@
-# Mailru-api  [![Build Status](https://secure.travis-ci.org/ademin/mailru-api.png)](http://travis-ci.org/ademin/mailru-api)
+# Mailru-api  [![Build Status](https://secure.travis-ci.org/ademin/mailru-api.png)](http://travis-ci.org/ademin/mailru-api) [![Code Climate](https://codeclimate.com/github/ademin/mailru-api.png)](https://codeclimate.com/github/ademin/mailru-api)
 
 Mailru-api - это гем, предоставляющий простой и лаконичный способ взаимодействия с сервисами @MAIL.RU, реализованный на базе @MAIL.RU REST API (документацию можно найти по ссылке: http://api.mail.ru/docs/guides/restapi/).
 
