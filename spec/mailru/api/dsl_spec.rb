@@ -17,12 +17,10 @@ module MailRU
           end
         end
 
-        it %(should have methods: 'send', 'get_method', 'post_method', 'get_secure_method', 'post_insecure_method']) do
-          subject.should respond_to(:send)
-          subject.should respond_to(:get_method)
-          subject.should respond_to(:post_method)
-          subject.should respond_to(:get_secure_method)
-          subject.should respond_to(:post_insecure_method)
+        it %(should have singleton_methods: 'send', 'get_method', 'post_method', 'get_secure_method', 'post_insecure_method') do
+          subject.singleton_methods.sort.should eq(
+            [:send, :get_method, :post_method, :get_secure_method, :post_insecure_method].sort
+          )
         end
 
         it %q(should have method 'send' which send any GET request) do
