@@ -17,8 +17,8 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
   s.required_ruby_version = '>= 1.9.3'
 
-  s.add_development_dependency 'rake', '>= 10.0.1'
-  s.add_development_dependency 'rspec', '>= 2.14.1'
-  s.add_development_dependency 'webmock', '>= 1.15.0'
-  s.add_development_dependency 'coveralls', '>= 0.7.0'
+  s.add_development_dependency 'rake', '= 10.0.1'
+  s.add_development_dependency 'rspec', '= 2.14.1'
+  s.add_development_dependency 'webmock', '= 1.15.0'
+  s.add_development_dependency 'coveralls', '= 0.7.0'
 end
